@@ -1,0 +1,65 @@
+$def with(goods_list)
+$var title: 商品列表
+
+
+$def showRow(goods):
+    <tr>
+        <td>$goods.code.val()</td>
+        <td>$goods.title.val()</td>
+        <td>$goods.price.val()</td>
+        <td>$goods.sell_price.val()</td>
+        <td>
+            <a href="#" data-id="$goods.id()" class="btn btn-info modi">
+                <i class="icon-pencil icon-white"></i>
+                修改
+            </a>
+            <a href="#" data-id="$goods.id()" class="btn btn-danger del">
+                <i class="icon-remove icon-white"></i>
+                删除
+            </a>
+        </td>
+    </tr>
+
+
+<script type="text/javascript">
+    sort_url = "/admin/goods/";
+    page_size = $goods_list.size;
+    del_url = "/admin/goods/del/";
+    modi_url = "/admin/goods/edit/";
+</script>
+<div class="row">
+</div>
+<ul class="nav nav-tabs">
+    <li class="active">
+        <a href="#">
+            <i class="icon-th-list"></i>
+            列表</a>
+    </li>
+    <li>
+        <a href="/admin/goods/edit/">
+            <i class="icon-pencil"></i>
+            新建
+        </a></li>
+</ul>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>商品名称</th>
+            <th>价格</th>
+            <th>售价</th>
+            <th>管理</th>
+        </tr>
+    </thead>
+
+$if len(goods_list.list) <= 0:
+    <tr>
+        <td colspan="5" class="no-data">没有数据</td>
+    </tr>
+$else:
+    $for goods2 in goods_list.list:
+        $:showRow(goods2)
+</table>
+$:goods_list.pager()
+
+
