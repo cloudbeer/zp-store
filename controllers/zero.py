@@ -1,6 +1,5 @@
 #coding: utf-8
 import web
-from config import app
 
 web.config.debug = True
 #session = web.session.Session(app, web.session.DiskStore('sessions'), initializer={'user': {}})

@@ -1,41 +1,44 @@
-$def with(doc)
-$var title: 商品编辑
-$code:
-    code = ""
-    title = ""
-    price = ""
-    sell_price = ""
-    sale_price = ""
-    content = ""
-    friendly_path = ""
-    spec = ""
-    xtitle = "新建"
-    if (doc is not None):
-        code = doc.code.val()
-        title = doc.title.val()
-        price = doc.price.val()
-        sell_price = doc.sell_price.val()
-        sale_price = doc.sale_price.val()
-        content = doc.content.val()
-        friendly_path =  doc.friendly_path.val()
-        spec = doc.spec.val()
-    	xtitle = "修改"
-        
-        
+<%inherit file="_layout.html"/>
+<%block name="title">
+    Goods Edit
+</%block>
+
+<%
+code = ""
+title = ""
+price = ""
+sell_price = ""
+sale_price = ""
+content = ""
+friendly_path = ""
+spec = ""
+xtitle = "新建"
+if zpentity is not None:
+    code = zpentity.code.val()
+    title = zpentity.title.val()
+    price = zpentity.price.val()
+    sell_price = zpentity.sell_price.val()
+    sale_price = zpentity.sale_price.val()
+    content = zpentity.content.val()
+    friendly_path =  zpentity.friendly_path.val()
+    spec = zpentity.spec.val()
+    xtitle = "修改"
+%>
+
 <script type='text/javascript' src='/static/ueditor/editor_config.js'></script>
 <script type='text/javascript' src='/static/ueditor/editor_all_min.js'></script>
 <script type="text/javascript">
     var editor = new UE.ui.Editor({});
     UE.getEditor('content', {
-		'toolbars': [['fullscreen','source', '|', 'undo', 'redo','|', 'link', 'unlink', 'anchor', '|', 'insertimage', 'emotion'], 
-						 [ 'forecolor', 'backcolor','|', 'bold', 'italic', 'underline', 'strikethrough','|', 'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|']
-						],
+		'toolbars': [["fullscreen",'source', '|', 'undo', 'redo','|', 'link', 'unlink', 'anchor', '|', 'insertimage', 'emotion'],
+					[ "forecolor", 'backcolor','|', 'bold', 'italic', 'underline', 'strikethrough','|', 'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|']
+				],
 		theme:"modern"
 	});
     UE.getEditor('spec', {
 		'toolbars': [['fullscreen','source', '|', 'undo', 'redo','|', 'link', 'unlink', 'anchor', '|', 'insertimage', 'emotion'], 
-						 [ 'forecolor', 'backcolor','|', 'bold', 'italic', 'underline', 'strikethrough','|', 'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|']
-						],
+					[ 'forecolor', 'backcolor','|', 'bold', 'italic', 'underline', 'strikethrough','|', 'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|']
+					],
 		theme:"modern"
 	});
 </script>
@@ -48,59 +51,63 @@ $code:
     <li class="active">
         <a href="/admin/goods/edit/">
             <i class="icon-pencil"></i>
-            $xtitle
+            ${xtitle}
         </a></li>
 </ul>
 <form method="post" class='' style='padding: 0 30px'>
-        <div class="row">
-       		<div class='span12'>
-	            <label class="control-label" for="title">商品名称</label>
-	             <input type="text" class="span12" id="title" name="title" placeholder="商品名称" value="$title">
-             </div>
+    <div class="row">
+        <div class='span12'>
+            <label class="control-label" for="title">商品名称</label>
+             <input type="text" class="span12" id="title" name="title" placeholder="商品名称" value="${title}">
+         </div>
+    </div>
+    <div class="row">
+        <div class='span3'>
+            <label class="control-label" for="code">商品编码</label>
+                <input type="text" class="span12" id="code" name="code" placeholder="商品编码" value="${code}" />
         </div>
-        <div class="row">
-       		<div class='span3'>
-	            <label class="control-label" for="code">商品编码</label>
-	                <input type="text" class="span12" id="code" name="code" placeholder="商品编码" value="$code">
-            </div>
-       		<div class='span9 input-prepend'>
-	            <label class="control-label" for="title">URL优化</label>
-	            <span class="add-on">goods/</span>
-	            <input type="text" class="span11" id="friendly_path" name="friendly_path" placeholder="URL关键字，不填写则是商品的id" value="$friendly_path">
-             </div>
+        <div class='span9 input-prepend'>
+            <label class="control-label" for="title">URL优化</label>
+            <span class="add-on">goods/</span>
+            <input type="text" class="span11" id="friendly_path" name="friendly_path"
+                   placeholder="URL关键字，不填写则是商品的id" value="${friendly_path}">
+         </div>
+    </div>
+    <div class="row">
+        <div class='span4'>
+            <label class="control-label" for="sell_price">商品售价</label>
+                <input type="text" class="span12" placeholder="商品进价" name="sell_price"
+                       id="sell_price"  value="${sell_price}">
         </div>
-        <div class="row">
-       		<div class='span4'>
-	            <label class="control-label" for="sell_price">商品售价</label>
-	                <input type="text" class="span12" placeholder="商品进价" name="sell_price" id="sell_price"  value="$sell_price">
-            </div>
-       		<div class='span4'>
-	            <label class="control-label" for="sale_price">打折价</label>
-	                <input type="text" class="span12" placeholder="打折价" name="sale_price" id="sale_price" value="$sale_price">
-            </div>
-       		<div class='span4'>
-	            <label class="control-label" for="price">商品标价</label>
-	                <input type="text" class="span12" placeholder="商品标价" name="price" id="price" value="$price">	            
-            </div>
+        <div class='span4'>
+            <label class="control-label" for="sale_price">打折价</label>
+                <input type="text" class="span12" placeholder="打折价" name="sale_price"
+                       id="sale_price" value="${sale_price}">
         </div>
-        <div class="row">
-            <label class="control-label" for="avatar">商品图片</label>
-            <div class="controls">
-                <input type="file" />
-            </div>
+        <div class='span4'>
+            <label class="control-label" for="price">商品标价</label>
+                <input type="text" class="span12" placeholder="商品标价" name="price"
+                       id="price" value="${price}">
         </div>
-        <div class="row">
-            <label class="control-label" for="content">商品介绍</label>
-            <textarea id="content" name="content" class="" placeholder="商品介绍">$content</textarea>            
+    </div>
+    <div class="row">
+        <label class="control-label" for="avatar">商品图片</label>
+        <div class="controls">
+            <input type="file" id="avatar" />
         </div>
-        <div class="row">
-            <label class="control-label" for="spec">商品规格</label>
-            <textarea id="spec" name="spec" class="" placeholder="商品规格">$spec</textarea>            
-        </div>
-        <div class="row">
-            <label class="control-label"></label>
-                <button class="btn btn-large btn-primary" type="submit">
-                    保存
-                </button>
-        </div>
+    </div>
+    <div class="row">
+        <label class="control-label" for="content">商品介绍</label>
+        <textarea id="content" name="content" class="" placeholder="商品介绍">${content}</textarea>
+    </div>
+    <div class="row">
+        <label class="control-label" for="spec">商品规格</label>
+        <textarea id="spec" name="spec" class="" placeholder="商品规格">${spec}</textarea>
+    </div>
+    <div class="row">
+        <label class="control-label"></label>
+            <button class="btn btn-large btn-primary" type="submit">
+                保存
+            </button>
+    </div>
 </form>

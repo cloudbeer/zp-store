@@ -1,5 +1,6 @@
 # coding: utf-8
 import web
+from web.contrib.template import render_mako
 
 pre_fix = 'controllers.';
 urls = ('/?', pre_fix + 'welcome.index',
@@ -11,9 +12,22 @@ urls = ('/?', pre_fix + 'welcome.index',
 		)
 
 
-app = web.application(urls, globals())
+app = web.application(urls, globals(), autoreload=True)
 
-page_admin = web.template.render('templates/admin/', base='_layout')
-page_front = web.template.render('templates/', base='_layout')
+page_admin = render_mako(
+    directories=['templates/admin/'],
+    default_filters=['decode.utf8'],
+    input_encoding='utf-8',
+    output_encoding='utf-8',
+)
+page_front = render_mako(
+    directories=['templates/'],
+    default_filters=['decode.utf8'],
+    input_encoding='utf-8',
+    output_encoding='utf-8',
+)
+
+#page_admin = web.template.render('templates/admin/', base='_layout')
+#page_front = web.template.render('templates/', base='_layout')
 
 

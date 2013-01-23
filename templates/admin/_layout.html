@@ -1,6 +1,4 @@
-$def with (content)
 <!DOCTYPE html>
-
 <html>
 	<head>
 		<script type="text/javascript" src="/static/js/jquery.min.js"></script>
@@ -10,8 +8,11 @@ $def with (content)
 		<script type="text/javascript" src="/static/js/jquery.validate.min.js"></script>
 		<script type="text/javascript" src="/static/js/messages_cn.js"></script>
 		<script type="text/javascript" src="/static/js/zp-puzi.js"></script>
+		<title>
+            <%block name="title"/> - zp-store, niux.
+		</title>
 
-		<title>$content.title</title>
+        <%block name="header"/>
 	</head>
 	<body>
 		<div class="container-fluid">
@@ -20,7 +21,7 @@ $def with (content)
 					菜单在这里
 				</div>
 				<div class="span10">
-					$:content
+                    ${self.body()}
 				</div>
 			</div>
 

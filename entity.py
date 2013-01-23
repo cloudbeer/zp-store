@@ -1,5 +1,5 @@
-﻿from zippydb.mongo import entity, field, zpid
-from zippydb.fields import zpfloat, zpdatetime, zpstr
+﻿from mongo import entity, field, zpid
+from fields import zpfloat, zpdatetime, zpstr
 
 class goods(entity):
     """
@@ -17,6 +17,9 @@ class goods(entity):
         self.friendly_path = field(zpstr)
         self.content = field(zpstr)
         self.spec = field(zpstr)
+        self.create_date = field(zpdatetime)
+        self.update_date = field(zpdatetime)
+
         
 class user(entity):
     """

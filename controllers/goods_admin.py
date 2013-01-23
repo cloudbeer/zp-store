@@ -1,11 +1,10 @@
 # coding: utf-8
+from mongo import *
 from zero import *
 from config import page_admin
 from bson.objectid import ObjectId
 from entity import goods
-from zippydb.mongo import *
-
-#table = mongo_store.goods
+import datetime
 
 class index(admin_controller):
     def GET(self):
@@ -15,23 +14,26 @@ class index(admin_controller):
         size = size if size > 0 else 10
         page = page if page > 0 else 1
         
-        goods_list = find(goods, size=size, page=page)
-
-        return page_admin.goods_list(goods_list)
+        goods_list = find(goods, size=size, page=page, orderby=('create_date', -1))
+        return page_admin.goods_list(zplist = goods_list)
 
 class edit(admin_controller):
     def GET(self, name = None):
-        doc = None
-        if (name is not None):
+        if name is not None:
             doc = find_one(goods, _id = name)
-        return page_admin.goods_edit(doc)
+            if doc is not None: return page_admin.goods_edit(zpentity = doc)
+            else: raise web.InternalError("404, goods not found.")
+        else:
+            return page_admin.goods_edit(zpentity = None)
 
     def POST(self, name = None):
         input = web.input()
         thegoods = goods()
         thegoods.bind(input)
+        thegoods.update_date.zval = datetime.datetime.now()
         #return thegoods.dump()
-        if (name is None):
+        if name is None:
+            thegoods.create_date.zval = datetime.datetime.now()
             insert(thegoods)
             
         else:
@@ -42,7 +44,7 @@ class edit(admin_controller):
 class delete(admin_controller):
     def POST(self):
         _id = web.input()._id
-        table.remove({"_id": ObjectId(_id)})
+        remove(goods, _id = _id)
         return 1
 
     
