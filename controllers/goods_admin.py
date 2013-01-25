@@ -1,4 +1,7 @@
 # coding: utf-8
+import sys
+sys.path.append('/home/cloudbeer/projects/zp-db-mongo')
+
 from mongo import *
 from zero import *
 from config import page_admin
@@ -35,7 +38,6 @@ class edit(admin_controller):
         if name is None:
             thegoods.create_date.zval = datetime.datetime.now()
             insert(thegoods)
-            
         else:
             thegoods._id.val(name)
             update(thegoods)

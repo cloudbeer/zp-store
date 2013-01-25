@@ -7,6 +7,7 @@ class goods(entity):
     """
     __table__ = 'goods'
     def __init__(self):
+        entity.__init__(self)
         #self._id = field(zpid)
         self.code = field(zpstr)
         self.title = field(zpstr)
@@ -29,6 +30,7 @@ class goods(entity):
 class goods_picture(entity):
     __table__ = 'goods_picture'
     def __int__(self):
+        entity.__init__(self)
         self.path = field(zpstr)
         self.title = field(zpstr)
 
@@ -39,7 +41,7 @@ class user(entity):
     """
     __table__ = 'user'
     def __init__(self):
-        #self._id = field(zpid)
+        entity.__init__(self)
         self.username = field(zpstr)
         self.password = field(zpstr)
         self.salt = field(zpstr)
@@ -57,6 +59,7 @@ class user(entity):
 class user_address(entity):
     __table__ =  'user_address'
     def __init__(self):
+        entity.__init__(self)
         self.user_id = field(zpid)  #This will not use mongo reference. i don't like fk
         self.reciever = field(zpstr)
         self.country = field(zpstr)
@@ -70,6 +73,7 @@ class user_address(entity):
 class delivery_corp(entity):
     __table__ =  'delivery_corp'
     def __init__(self):
+        entity.__init__(self)
         #self._id = field(zpid)
         self.title = field(zpstr)
         self.query_url_pattern = field(zpstr)
@@ -77,6 +81,7 @@ class delivery_corp(entity):
 class order(entity):
     __table__ = 'order'
     def __init__(self):
+        entity.__init__(self)
         self.code = field(zpstr)
         self.status = field(zpint, 1)
         # money
@@ -103,6 +108,9 @@ class order(entity):
     
 class order_item(entity):
     __table__ = 'order_item'
+    def __init__(self):
+        entity.__init__(self)
+
 
         
         

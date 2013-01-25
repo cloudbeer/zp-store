@@ -41,4 +41,5 @@ My nginx with uWSGI config:
     }
 
 
-Start uWSGI with (at app folder): 'uwsgi -s :9090 -w index'
+Start uWSGI with (at app folder):
+    uwsgi -s :9090 -w index
