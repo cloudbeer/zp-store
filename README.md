@@ -22,3 +22,23 @@ Depends on:
 * [Mako](http://www.makotemplates.org/)
 
 
+My nginx with uWSGI config:
+
+
+    server {
+        listen  80;
+        server_name     zp-store;
+        location / {
+                include uwsgi_params;
+                uwsgi_pass 127.0.0.1:9090;
+         }
+        location /favicon.ico {
+                alias /home/cloudbeer/projects/zp-store/favicon.ico;
+        }
+        location /upload {
+                alias /home/cloudbeer/projects/zp-store/upload;
+        }
+    }
+
+
+Start uWSGI with (at app folder): 'uwsgi -s :9090 -w index'
