@@ -1,0 +1,17 @@
+__repr__: ''
+__str__: ''
+btn_Register: Register
+form_Email: Email
+form_Nick: Nick
+form_Password: Password
+form_RePassword: RePassword
+form_RememberMe: RememberMe
+label_home: home
+label_login: login
+label_register: register
+label_shopcart: shopcart
+ph_Email: Email
+ph_Nick: Nick
+ph_Password: Password
+ph_RePassword: RePassword
+pt_Register: Register

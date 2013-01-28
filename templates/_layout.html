@@ -1,0 +1,78 @@
+<% from i8n import r %>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Cloudbeer">
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <%block name="header"/>
+    <title>
+        <%block name="title"/> - zp-store, niux.
+    </title>
+    <style>
+        body {
+            padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+        }
+    </style>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="#">Project name</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li class="">
+                        <a href="/">${r.label_home}</a>
+                    </li>
+                    <li class="">
+                        <a href="/shopcart/">${r.label_shopcart}</a>
+                    </li>
+                    <li class="active">
+                        <a href="./base-css.html">收藏夹</a>
+                    </li>
+                    <li class="">
+                        <a href="./components.html">网站导航</a>
+                    </li>
+                    <li class="">
+                        <a href="/account/">My MALL</a>
+                    </li>
+                    <li class="">
+                        <a href="/account/register/">${r.label_register}</a>
+                    </li>
+                    <li class="">
+                        <a href="/account/login/">${r.label_login}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<header class="subhead">
+    <div class="container">
+        <h1>防范本铺
+        </h1>
+    </div>
+</header>
+
+<div class="container">
+    ${self.body()}
+</div>
+
+
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+<!--<script type="text/javascript" src="/static/js/jquery-ui-min.js"></script>-->
+<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/static/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" type="text/css" href="/static/css/i8n/jp.css" />
+<script type="text/javascript" src="/static/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/static/js/messages_cn.js"></script>
+</body>
+</html>

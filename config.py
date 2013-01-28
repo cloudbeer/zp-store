@@ -2,6 +2,8 @@
 import web
 from web.contrib.template import render_mako
 
+lang = 'zh-CN'
+
 pre_fix = 'controllers.';
 urls = ('/?', pre_fix + 'welcome.index',
 		'/admin/goods/?', pre_fix + 'goods_admin.index',
@@ -9,6 +11,7 @@ urls = ('/?', pre_fix + 'welcome.index',
 		'/admin/goods/edit/(.*)/?', pre_fix + 'goods_admin.edit',
 		'/admin/goods/del/?', pre_fix + 'goods_admin.delete',
 		'/admin/goods/show/(.*)/?', pre_fix + 'goods_admin.detail',
+        '/account/register/?', pre_fix + 'account.register',
 		)
 
 
@@ -19,6 +22,7 @@ page_admin = render_mako(
     default_filters=['decode.utf8'],
     input_encoding='utf-8',
     output_encoding='utf-8',
+
 )
 page_front = render_mako(
     directories=['templates/'],
@@ -26,8 +30,3 @@ page_front = render_mako(
     input_encoding='utf-8',
     output_encoding='utf-8',
 )
-
-#page_admin = web.template.render('templates/admin/', base='_layout')
-#page_front = web.template.render('templates/', base='_layout')
-
-

@@ -20,9 +20,10 @@ Depends on:
 * [baidu ueditor](http://ueditor.baidu.com/website/)
 * [bootstrap](http://twitter.github.com/bootstrap/index.html)
 * [Mako](http://www.makotemplates.org/)
+* [PyYAML](http://pyyaml.org/)
 
 
-My nginx with uWSGI config:
+###### My nginx with uWSGI config:
 
 
     server {
@@ -41,5 +42,8 @@ My nginx with uWSGI config:
     }
 
 
-Start uWSGI with (at app folder):
+###### Start uWSGI with (at app folder):
     uwsgi -s :9090 -w index
+
+
+###### i18n using yaml

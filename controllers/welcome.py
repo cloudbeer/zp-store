@@ -1,12 +1,13 @@
 #coding: utf-8
-from zero import *
+from controllers import *
+from config import page_front
 #from pymongo import MongoClient
 #connection = MongoClient()
 
 class index(controller):
     def GET(self):
         #session.user['mobile'] = '111111111'
-        return "你好，世界2 "
+        return page_front.index()
     
     
 #class test:

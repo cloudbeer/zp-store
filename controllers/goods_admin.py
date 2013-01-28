@@ -1,9 +1,7 @@
 # coding: utf-8
-import sys
-sys.path.append('/home/cloudbeer/projects/zp-db-mongo')
 
 from mongo import *
-from zero import *
+from controllers import *
 from config import page_admin
 from bson.objectid import ObjectId
 from entity import goods

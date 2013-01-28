@@ -1,6 +1,13 @@
 ﻿from mongo import entity, field, zpid
 from fields import zpfloat, zpdatetime, zpstr, zpint
 
+class category(entity):
+    __table__ =  'category'
+    def __init__(self):
+        self.title = field(zpstr)
+        self.parent_id = field(zpid)
+        self.friendly_code = field(zpstr)
+
 class goods(entity):
     """
     goods
@@ -8,24 +15,32 @@ class goods(entity):
     __table__ = 'goods'
     def __init__(self):
         entity.__init__(self)
-        #self._id = field(zpid)
         self.code = field(zpstr)
         self.title = field(zpstr)
         self.avatar_path = field(zpstr)
         self.content = field(zpstr)
         self.spec = field(zpstr)
+        self.category_id = field(zpid)
         #price and count
         self.price = field(zpfloat)
         self.sell_price = field(zpfloat)
         self.sale_price = field(zpfloat)
         self.stock_count = field(zpint, -1)
         #seo
-        self.friendly_path = field(zpstr)
+        self.friendly_code = field(zpstr)
         self.page_desc = field(zpstr)
         self.hot = field(zpint)
         #----------------
         self.status = field(zpint)
         self.type = field(zpint)
+
+
+class goods_category(entity):
+    __table__ = 'goods_category'
+    def __init__(self):
+        self.goods_id = field(zpid)
+        self.category_id = field(zpid)
+
 
 class goods_picture(entity):
     __table__ = 'goods_picture'
@@ -112,5 +127,42 @@ class order_item(entity):
         entity.__init__(self)
 
 
-        
-        
+#CMS
+class cms_category(entity):
+    __table__ = 'category'
+
+class article(entity):
+    __table__ = 'article'
+
+class article_category(entity):
+    __table__ =  'article_category'
+
+
+
+#Extend Sales Module
+class groupon(entity):
+    """
+    团购支持，可以设置人数和价格
+    """
+    __table__ = 'groupon'
+    def __init__(self):
+        self.goods_id = field(zpid)
+        self.max_count = field(zpint)
+        self.end_date = field(zpdatetime)
+        self.buyer_count = field(zpint)
+        self.payer_count = field(zpint)
+        self.price_now = field(zpfloat)
+
+class groupon_price(entity):
+    """
+    团购支持，可以设置人数和价格
+    """
+    __table__ = 'groupon_price'
+    def __init__(self):
+        self.groupon_id = field(zpid)
+        self.goods_id = field(zpid)
+        self.to_count = field(zpint, 100)
+        self.min_price = field(zpfloat, 0)
+        self.max_count = field(zpint)
+        self.end_date = field(zpdatetime)
+
