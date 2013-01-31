@@ -1,6 +1,7 @@
 import yaml
 import os
 from config import lang
+from tools import webroot
 
 from operator import itemgetter
 
@@ -13,7 +14,6 @@ def sbv6(d,reverse=False):
     return dict(sorted(d.iteritems(), key=itemgetter(1), reverse=True))
 
 
-webroot = os.path.abspath(os.path.dirname(__file__))
 i18dir = webroot + '/i18n'
 res_path = i18dir + '/' + lang
 f = open(res_path+'/res.yaml')

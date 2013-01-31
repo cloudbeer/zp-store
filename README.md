@@ -47,3 +47,5 @@ Depends on:
 
 
 ###### i18n using yaml
+
+    Default lang is 'zh-CN'

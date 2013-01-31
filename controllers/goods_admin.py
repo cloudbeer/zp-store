@@ -1,4 +1,5 @@
 # coding: utf-8
+import os
 
 from mongo import *
 from controllers import *
@@ -6,9 +7,11 @@ from config import page_admin
 from bson.objectid import ObjectId
 from entity import goods
 import datetime
+from tools import upload_path, goods_image_name
 
 class index(admin_controller):
     def GET(self):
+
         xinput = web.input(size=10, page=1)
         size = int(xinput.size)
         page = int(xinput.page)
@@ -29,8 +32,22 @@ class edit(admin_controller):
 
     def POST(self, name = None):
         input = web.input()
+        #return input
+        ifile = web.input(avatar={})
+        filePath = goods_image_name()
+        if 'avatar' in ifile:
+            ifile['avatar'].file.seek(0, os.SEEK_END)
+            if ifile['avatar'].file.tell() > 0:
+                fout = open(filePath % '_o','w') # creates the file where the uploaded file should be stored
+                ifile['avatar'].file.seek(0)
+                fout.write(ifile.avatar.file.read()) # writes the uploaded file to the newly created file.
+                fout.close() # closes the file, upload complete.
+
+
+
         thegoods = goods()
         thegoods.bind(input)
+        thegoods.avatar_path.zval = filePath
         thegoods.update_date.zval = datetime.datetime.now()
         #return thegoods.dump()
         if name is None:

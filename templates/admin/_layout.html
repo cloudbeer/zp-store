@@ -1,3 +1,7 @@
+<%
+    from i18n import r
+    import web
+%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -5,6 +9,7 @@
 		<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
 		<!--<script type="text/javascript" src="/static/js/jquery-ui-min.js"></script>-->
 		<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="/static/css/bootstrap-responsive.min.css" />
 		<script type="text/javascript" src="/static/js/jquery.validate.min.js"></script>
 		<script type="text/javascript" src="/static/js/messages_cn.js"></script>
 		<script type="text/javascript" src="/static/js/zp-puzi.js"></script>
@@ -17,8 +22,15 @@
 	<body>
 		<div class="container-fluid">
 			<div class="row-fluid">
-				<div class="span2">
-					菜单在这里
+				<div class="span2 well" style="padding: 8px 0;margin: 10px 0">
+                    <ul class="nav nav-list">
+                        ${showMenu('/admin/home/', r.m_Home)}
+                        ${showMenu('/admin/goods/', r.m_Goods)}
+                        ${showMenu('/admin/goods_cateory/', r.m_GoodsCategory)}
+                        ${showMenu('/admin/order_all/', r.m_AllOrder)}
+                        ${showMenu('/admin/order_will_process/', r.m_OrderInProcessing)}
+                        ${showMenu('/admin/users/', r.m_Users)}
+                    </ul>
 				</div>
 				<div class="span10">
                     ${self.body()}
@@ -28,3 +40,14 @@
 		</div>
 	</body>
 </html>
+
+
+<%def name="showMenu(link, label)">
+    %if web.url().startswith(link):
+        <li class="active"><a href="${link}"><i class="icon-chevron-right"></i> ${label}</a></li>
+    %else:
+        <li><a href="${link}"><i class="icon-chevron-right"></i> ${label}</a></li>
+    %endif
+</%def>
+
+

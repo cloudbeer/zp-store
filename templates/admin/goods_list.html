@@ -1,33 +1,35 @@
+<% from i18n import r %>
 <%inherit file="_layout.html"/>
 <%block name="title">
-    Goods list
+    <% from i18n import r %>
+    ${r.pt_GoodsList}
 </%block>
 <ul class="nav nav-tabs">
     <li class="active">
         <a href="#">
             <i class="icon-th-list"></i>
-            列表</a>
+            ${r.m_List}</a>
     </li>
     <li>
         <a href="/admin/goods/edit/">
             <i class="icon-pencil"></i>
-            新建
+            ${r.m_Create}
         </a></li>
 </ul>
 <table class="table table-hover">
     <thead>
     <tr>
         <th>#</th>
-        <th>商品名称</th>
-        <th>价格</th>
-        <th>售价</th>
-        <th>管理</th>
+        <th>${r.form_Title}</th>
+        <th>${r.form_PriceList}</th>
+        <th>${r.form_Price}</th>
+        <th>${r.form_Manage}</th>
     </tr>
     </thead>
 
     %if len(zplist.list) <= 0:
     <tr>
-        <td colspan="5" class="no-data">没有数据</td>
+        <td colspan="5" class="no-data">${r.tip_NoData}</td>
     </tr>
     %else:
         %for goods2 in zplist.list:
@@ -57,11 +59,11 @@ ${zplist.pager()}
         <td>
             <a href="#" data-id="${goods.id()}" class="btn btn-info modi">
                 <i class="icon-pencil icon-white"></i>
-                修改
+                ${r.btn_Modify}
             </a>
             <a href="#" data-id="${goods.id()}" class="btn btn-danger del">
                 <i class="icon-remove icon-white"></i>
-                删除
+                ${r.btn_Delete}
             </a>
         </td>
     </tr>

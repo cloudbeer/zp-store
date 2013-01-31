@@ -1,0 +1,48 @@
+<% from i18n import r %>
+<%inherit file="_layout.html"/>
+
+<%block name="title">
+    <% from i8n import r %>
+    ${r.pt_Login}
+</%block>
+<%
+##    xemail = input_email
+error_password = errors['password'] if errors.has_key('password') else None
+error_email = errors['email'] if errors.has_key('email') else None
+%>
+
+<div id="login_form" class="form-actions">
+    <form id="xform" class="form-horizontal" method="post">
+        <div class="control-group">
+            <label class="control-label" for="email">${r.form_Email}</label>
+            <div class="controls">
+                <input type="text" id="email" name="email" placeholder="${r.ph_Email}"
+                       class="required email" value="${input_email}" />
+                % if error_email is not None:
+                        <div class="error">${error_email}</div>
+                % endif
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="password">${r.form_Password}</label>
+            <div class="controls">
+                <input type="password" id="password" name="password" placeholder="${r.ph_Password}" class="required" />
+                % if error_password is not None:
+                    <div class="error">${error_password}</div>
+                % endif
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <label class="checkbox">
+                    <input type="checkbox" name="remember_me" value="1" />${r.form_RememberMe}
+                </label>
+                <button type="submit" class="btn">${r.btn_Login}</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+
+

@@ -1,0 +1,67 @@
+<% from i18n import r %>
+<%inherit file="_layout.html"/>
+<%block name="title">
+    <% from i18n import r %>
+    ${r.pt_GoodsCategory}
+</%block>
+<ul class="nav nav-tabs">
+    <li class="active">
+        <a href="#">
+            <i class="icon-th-list"></i>
+            ${r.m_List}</a>
+    </li>
+    <li>
+        <a href="/admin/goods_category/edit/">
+            <i class="icon-pencil"></i>
+            ${r.m_Create}
+        </a></li>
+</ul>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>${r.form_Title}</th>
+        <th>${r.form_Manage}</th>
+    </tr>
+    </thead>
+
+    %if len(zplist.list) <= 0:
+    <tr>
+        <td colspan="3" class="no-data">${r.tip_NoData}</td>
+    </tr>
+    %else:
+        %for cate2 in zplist.list:
+            ${showRow(cate2)}
+        % endfor
+    % endif
+</table>
+
+
+
+<%block name="header">
+    <script type="text/javascript">
+        sort_url = "/admin/goods_category/";
+        del_url = "/admin/goods_category/del/";
+        modi_url = "/admin/goods_category/edit/";
+    </script>
+</%block>
+
+
+<%def name="showRow(row)">
+    <tr>
+        <td>${row.title.zval}</td>
+        <td>${row.title.zval}</td>
+        <td>
+            <a href="#" data-id="${goods.id()}" class="btn btn-info modi">
+                <i class="icon-pencil icon-white"></i>
+                ${r.btn_Modify}
+            </a>
+            <a href="#" data-id="${goods.id()}" class="btn btn-danger del">
+                <i class="icon-remove icon-white"></i>
+                ${r.btn_Delete}
+            </a>
+        </td>
+    </tr>
+</%def>
+
+

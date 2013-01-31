@@ -15,13 +15,13 @@
 from config import app
 
 #run directly
-#if __name__ == '__main__':
-#    app.run()
+if __name__ == '__main__':
+    app.run()
 
 
 import yaml
 
-d = {'x': 1, 'y': 2, 'a': 100}
+#d = {'x': 1, 'y': 2, 'a': 100}
 #
 #print(sbv6(d))
 #

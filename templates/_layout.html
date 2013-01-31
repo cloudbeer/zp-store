@@ -1,4 +1,4 @@
-<% from i8n import r %>
+<% from i18n import r %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="Cloudbeer">
+##    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script type="text/javascript" src="/static/js/jquery.min.js"></script>
     <%block name="header"/>
     <title>
@@ -30,10 +31,10 @@
             <div class="nav-collapse collapse">
                 <ul class="nav">
                     <li class="">
-                        <a href="/">${r.label_home}</a>
+                        <a href="/">${r.m_Home}</a>
                     </li>
                     <li class="">
-                        <a href="/shopcart/">${r.label_shopcart}</a>
+                        <a href="/shopcart/">${r.m_Shopcart}</a>
                     </li>
                     <li class="active">
                         <a href="./base-css.html">收藏夹</a>
@@ -45,10 +46,10 @@
                         <a href="/account/">My MALL</a>
                     </li>
                     <li class="">
-                        <a href="/account/register/">${r.label_register}</a>
+                        <a href="/account/register/">${r.m_Register}</a>
                     </li>
                     <li class="">
-                        <a href="/account/login/">${r.label_login}</a>
+                        <a href="/account/login/">${r.m_Login}</a>
                     </li>
                 </ul>
             </div>
@@ -71,8 +72,7 @@
 <!--<script type="text/javascript" src="/static/js/jquery-ui-min.js"></script>-->
 <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/static/css/bootstrap-responsive.min.css" />
-<link rel="stylesheet" type="text/css" href="/static/css/i8n/jp.css" />
-<script type="text/javascript" src="/static/js/jquery.validate.min.js"></script>
-<script type="text/javascript" src="/static/js/messages_cn.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/css/i18n/jp.css" />
+<link rel="stylesheet" type="text/css" href="/static/css/styles.css" />
 </body>
 </html>
