@@ -1,0 +1,76 @@
+<% from i18n import r %>
+<%inherit file="_layout.html"/>
+<%block name="title">
+    <% from i18n import r %>
+    ${r.pt_GoodsImages}
+</%block>
+
+<%
+code = ""
+title = ""
+price = ""
+sell_price = ""
+sale_price = ""
+content = ""
+friendly_path = ""
+spec = ""
+xtitle = r.label_Create
+if zpentity is not None:
+    code = zpentity.code.val()
+    title = zpentity.title.val()
+    price = zpentity.price.val()
+    sell_price = zpentity.sell_price.val()
+    sale_price = zpentity.sale_price.val()
+    content = zpentity.content.val()
+    friendly_path =  zpentity.friendly_path.val()
+    spec = zpentity.spec.val()
+    xtitle = r.label_Modify
+%>
+
+<ul class="nav nav-tabs">
+    <li>
+        <a href="/admin/goods/">
+            <i class="icon-th-list"></i>
+            ${r.label_List}</a>
+    </li>
+    <li class="active">
+        <a href="#">
+            <i class="icon-picture"></i>
+            ${r.label_Pictures}
+        </a></li>
+</ul>
+
+<form method="post"  class="form-horizontal"  style="padding: 0 30px" enctype="multipart/form-data">
+    <div class="control-group">
+        <div class="controls">
+            <input type="text" id="title" name="title" placeholder="${r.ph_GoodsImageTitle}" />
+            <input type="file" id="avatar" name="avatar" placeholder="${r.ph_UploadPicture}"  class="required" />
+            <button class="btn btn-primary" type="submit">
+                ${r.btn_Upload}
+            </button>
+        </div>
+    </div>
+</form>
+
+<ul class='img_list clearfix'>
+    %if len(zpimamges.list) <= 0:
+            <li>
+                ${r.tip_NoData}
+            </li>
+    %else:
+        %for ximg in zpimamges.list:
+            <li>
+                <h5>${ximg.title.zval}</h5>
+                <img src='${ximg.path.zval % '_256'}' />
+            </li>
+        % endfor
+    % endif
+</ul>
+
+
+<style type="text/css">
+    .img_list {padding: 4px}
+    .img_list li {float:left; width: 300px; height: 320px; border: 1px solid #cccc77; margin: 10px;list-style: none;text-align: center;}
+    .img_list li h5{font-size: 12px;font-weight: bold}
+    .img_list li img {max-width:256px;max-height: 256px;}
+</style>
