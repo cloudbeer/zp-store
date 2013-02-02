@@ -1,6 +1,8 @@
+<% from i18n import r %>
 <%inherit file="_layout.html"/>
 <%block name="title">
-    Goods Edit
+    <% from i18n import r %>
+    ${r.pt_GoodsEdit}
 </%block>
 
 <%
@@ -12,7 +14,7 @@ sale_price = ""
 content = ""
 friendly_path = ""
 spec = ""
-xtitle = "新建"
+xtitle = r.label_Create
 if zpentity is not None:
     code = zpentity.code.val()
     title = zpentity.title.val()
@@ -22,7 +24,7 @@ if zpentity is not None:
     content = zpentity.content.val()
     friendly_path =  zpentity.friendly_path.val()
     spec = zpentity.spec.val()
-    xtitle = "修改"
+    xtitle = r.label_Modify
 %>
 
 <script type='text/javascript' src='/static/ueditor/editor_config.js'></script>
@@ -46,7 +48,7 @@ if zpentity is not None:
     <li>
         <a href="/admin/goods/">
             <i class="icon-th-list"></i>
-            列表</a>
+            ${r.label_List}</a>
     </li>
     <li class="active">
         <a href="/admin/goods/edit/">
@@ -57,14 +59,14 @@ if zpentity is not None:
 <form method="post" class='' style='padding: 0 30px' enctype="multipart/form-data">
     <div class="row">
         <div class='span12'>
-            <label class="control-label" for="title">商品名称</label>
-             <input type="text" class="span12" id="title" name="title" placeholder="商品名称" value="${title}">
+            <label class="control-label" for="title">${r.label_GoodsTitle}</label>
+             <input type="text" class="span12" id="title" name="title" placeholder="${r.ph_GoodsTitle}" value="${title}">
          </div>
     </div>
     <div class="row">
         <div class='span3'>
-            <label class="control-label" for="code">商品编码</label>
-                <input type="text" class="span12" id="code" name="code" placeholder="商品编码" value="${code}" />
+            <label class="control-label" for="code">${r.label_GoodsCode}</label>
+                <input type="text" class="span12" id="code" name="code" placeholder="${r.ph_GoodsCode}" value="${code}" />
         </div>
         <div class='span9 input-prepend'>
             <label class="control-label" for="title">URL优化</label>
@@ -107,7 +109,7 @@ if zpentity is not None:
     <div class="row">
         <label class="control-label"></label>
             <button class="btn btn-large btn-primary" type="submit">
-                保存
+                ${r.btn_Save}
             </button>
     </div>
 </form>

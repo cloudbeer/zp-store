@@ -4,6 +4,7 @@ from fields import zpfloat, zpdatetime, zpstr, zpint
 class category(entity):
     __table__ =  'category'
     def __init__(self):
+        entity.__init__(self)
         self.title = field(zpstr)
         self.parent_id = field(zpid)
         self.friendly_code = field(zpstr)
@@ -38,16 +39,19 @@ class goods(entity):
 class goods_category(entity):
     __table__ = 'goods_category'
     def __init__(self):
+        entity.__init__(self)
         self.goods_id = field(zpid)
         self.category_id = field(zpid)
 
 
 class goods_picture(entity):
     __table__ = 'goods_picture'
-    def __int__(self):
+    def __init__(self):
         entity.__init__(self)
         self.path = field(zpstr)
         self.title = field(zpstr)
+        self.display_order = field(zpint, 0)
+        self.goods_id = field(zpid)
 
         
 class user(entity):

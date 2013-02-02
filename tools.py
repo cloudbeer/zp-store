@@ -31,36 +31,42 @@ def upload_path():
     rdir = webroot+'/upload/'+mydir+'/'+mydir2
     if not os.path.exists(rdir):
         os.makedirs(rdir)
-    return rdir
+    return rdir, '/upload/' + mydir + '/'+mydir2
 
 def goods_image_name(ext='.jpg'):
     rdmName = rdm_code(6, chars=string.ascii_letters+string.digits)
-    upath = upload_path() + '/' + rdmName + '%s' + ext
+    upath = upload_path()[0] + '/' + rdmName + '%s' + ext
     if not os.path.exists(upath%''):
-        return upath
+        return upath, upload_path()[1] + '/' + rdmName + '%s' + ext
     else:
         goods_image_name(ext)
 
 #TODO: This Method is not finished
-def crop_image(file, save_path, length=256, refMode='width'):
+def resize_image(file, save_path, rlen = 256, refMode='width'):
     img = Image.open(file)
-    ow,oh = img.size()
-    mw, mh = (length, length)
+    ow,oh = img.size
+    mw, mh = (rlen, rlen)
     if refMode=='width': #with is 256
-        mw = length
-        mh = length * ow/oh
+        mw = rlen
+        mh = rlen * oh/ow
     elif refMode=='height': #let hight be 256
-        mh = length
-        mw = length*oh/ow
+        mh = rlen
+        mw = rlen*ow/oh
     elif refMode=='both':  #max length is 256
-        if (ow>oh):
-            mw = length
-            mh = length * ow/oh
+        if ow>oh:
+            mw = rlen
+            mh = rlen * oh/ow
         else:
-            mh = length
-            mw = length*oh/ow
-    elif refMode=='square': # resize and crop image to square
-        pass
+            mh = rlen
+            mw = rlen*ow/oh
+#    elif refMode=='square': # resize and crop image to square
+#        if (ow>oh):
+#            mh = length
+#            mw = length*ow/oh
+#        else:
+#            mw = length
+#            mh = length * oh/ow
 
-    nImg = img.resize(mw, mh)
+
+    nImg = img.resize((mw, mh), Image.ANTIALIAS)
     nImg.save(save_path)

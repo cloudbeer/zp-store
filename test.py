@@ -10,13 +10,19 @@
 #gettext.install('res', i18dir, unicode=True)
 #gettext.translation('res', i18dir, languages=['en-US']).install(True)
 #
-
+from entity import *
+from tools import goods_image_name
+print(goods_image_name())
+thepic = goods()
+print(thepic)
 
 from config import app
 
 #run directly
-if __name__ == '__main__':
-    app.run()
+#if __name__ == '__main__':
+#    app.run()
+#if __name__ == '__main__':
+#    app.run()
 
 
 import yaml

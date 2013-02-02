@@ -65,8 +65,20 @@ ${zplist.pager()}
                 <i class="icon-remove icon-white"></i>
                 ${r.btn_Delete}
             </a>
+            <a href="#" data-id="${goods.id()}" class="btn btn-info img">
+                <i class="icon-picture icon-white"></i>
+                ${r.btn_Images}
+            </a>
         </td>
     </tr>
 </%def>
+
+<script type="text/javascript">
+    $(function(){
+        $(".img").click(function(){
+            window.location = '/admin/goods/images/' + $(this).attr("data-id");
+        });
+    })
+</script>
 
 
