@@ -40,6 +40,7 @@ if zpentity is not None:
         </a></li>
 </ul>
 
+<h4>${r.label_Title}: ${title} [${code}]</h4>
 <form method="post"  class="form-horizontal"  style="padding: 0 30px" enctype="multipart/form-data">
     <div class="control-group">
         <div class="controls">
@@ -59,18 +60,53 @@ if zpentity is not None:
             </li>
     %else:
         %for ximg in zpimamges.list:
-            <li>
+            <li data-id="${ximg.id()}">
                 <h5>${ximg.title.zval}</h5>
                 <img src='${ximg.path.zval % '_256'}' />
+
+                <div class="dbuttons">
+                    <button class="btn btn-small xavatar" type="button">
+                        ${r.btn_Avatar}
+                    </button>
+                    <button class="btn btn-small xdel" type="button">
+                        ${r.btn_SmallDelete}
+                    </button>
+                </div>
             </li>
         % endfor
     % endif
 </ul>
 
+<script type="text/javascript">
+    $(function(){
+       $('.xdel').click(function(){
+            if (!confirm('${r.tip_ConfirmDelete}'))
+                return;
+           var xthis = $(this);
+           $.post('/admin/goods/images/', {act:'del',  id: xthis.parent().parent().attr("data-id")}, function(res){
+               if (res == '1')
+                   xthis.parent().parent().remove();
+               else
+                    alert('${r.tip_Failure}');
+           })
+       });
+        $('.xavatar').click(function(){
+            var xthis = $(this);
+            $.post('/admin/goods/images/', {act:'avatar',  id: xthis.parent().parent().attr("data-id")}, function(res){
+                if (res == '1')
+                    alert('${r.tip_SuccessSetting}');
+                else
+                    alert('${r.tip_Failure}');
+            })
+        });
+    });
+</script>
 
 <style type="text/css">
     .img_list {padding: 4px}
-    .img_list li {float:left; width: 300px; height: 320px; border: 1px solid #cccc77; margin: 10px;list-style: none;text-align: center;}
+    .img_list li {float:left; width: 300px; height: 320px; border: 1px solid #cccc77; margin: 10px;
+        list-style: none;text-align: center;position: relative}
     .img_list li h5{font-size: 12px;font-weight: bold}
     .img_list li img {max-width:256px;max-height: 256px;}
+    .img_list .dbuttons{height:30px;width:300px;bottom: 0;position: absolute}
 </style>

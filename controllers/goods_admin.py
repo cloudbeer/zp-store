@@ -6,7 +6,7 @@ from controllers import *
 from config import page_admin
 from entity import goods, goods_picture
 import datetime
-from tools import upload_path, goods_image_name, resize_image
+from tools import upload_path, goods_image_name, resize_image, del_goods_images
 import os
 
 class index(admin_controller):
@@ -77,6 +77,7 @@ class images(admin_controller):
     def GET(self, name=None):
         if name is not None:
             doc = find_one(goods, _id = name)
+            #return doc.dump()
             if doc is not None:
                 mImages = find(goods_picture, where={'goods_id': zpid(name)}, orderby=('display_order', 1) )
                 return page_admin.goods_images(zpentity = doc, zpimamges = mImages)
@@ -85,6 +86,27 @@ class images(admin_controller):
         return page_admin.goods_images(zpentity = None, zpimamges = None)
     def POST(self, name = None):
         xinput = web.input()
+        if xinput.has_key('act') and xinput.act == 'del':
+            imgid = xinput.id
+            mgoodsImg = find_one(goods_picture, _id=imgid)
+            xpath = mgoodsImg.path.zval
+            try:
+                del_goods_images(xpath)
+            except OSError:
+                pass
+            remove(goods_picture, _id=imgid)
+            return 1
+        elif xinput.has_key('act') and xinput.act == 'avatar':
+            imgid = xinput.id
+            mgoodsImg = find_one(goods_picture, _id=imgid)
+            xpath = mgoodsImg.path.zval
+            xgoods_id = mgoodsImg.goods_id.zval
+            mGoods = goods()
+            mGoods._id.zval = xgoods_id
+            mGoods.avatar_path.zval = xpath
+            update(mGoods)
+            return 1
+
         ifile = web.input(avatar={})
         filePath_a = goods_image_name()
         filePath = filePath_a[0]

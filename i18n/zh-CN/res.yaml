@@ -1,11 +1,14 @@
+TipConfirmDelete: TipConfirmDelete
 __repr__: ''
 __str__: ''
+btn_Avatar: Avatar
 btn_Delete: Delete
 btn_Images: Images
 btn_Login: Login
 btn_Modify: Modify
 btn_Register: Register
 btn_Save: Save
+btn_SmallDelete: "\u5220"
 btn_Upload: Upload
 er_EmailNotFound: EmailNotFound
 er_PasswordIsWrong: PasswordIsWrong
@@ -24,6 +27,7 @@ label_GoodsTitle: GoodsTitle
 label_List: List
 label_Modify: Modify
 label_Pictures: Pictures
+label_Title: Title
 label_home: home
 label_login: login
 label_register: register
@@ -53,4 +57,5 @@ pt_GoodsImages: GoodsImages
 pt_GoodsList: GoodsList
 pt_Login: Login
 pt_Register: Register
+tip_ConfirmDelete: ConfirmDelete
 tip_NoData: NoData

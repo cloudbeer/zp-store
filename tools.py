@@ -70,3 +70,9 @@ def resize_image(file, save_path, rlen = 256, refMode='width'):
 
     nImg = img.resize((mw, mh), Image.ANTIALIAS)
     nImg.save(save_path)
+
+def del_goods_images(img_path):
+    filelist = [ webroot + img_path % '_o',  webroot + img_path % '_256', webroot + img_path % '_512',  webroot + img_path % '_800']
+    #return filelist
+    for f in filelist:
+        os.remove(f)

@@ -2,7 +2,7 @@
 import web
 from web.contrib.template import render_mako
 
-lang = 'zh-CN'
+lang = 'en-US'
 
 pre_fix = 'controllers.'
 

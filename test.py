@@ -11,10 +11,9 @@
 #gettext.translation('res', i18dir, languages=['en-US']).install(True)
 #
 from entity import *
-from tools import goods_image_name
-print(goods_image_name())
-thepic = goods()
-print(thepic)
+from tools import *
+print(del_goods_images('/upload/2012/01/' + 'TTT%sd.jpg'))
+
 
 from config import app
 
